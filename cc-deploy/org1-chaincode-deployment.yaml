@@ -1,0 +1,43 @@
+---
+#---------------- Chaincode Deployment ---------------------
+apiVersion: apps/v1 # for versions before 1.8.0 use apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: chaincode-basic-org1
+  labels:
+    app: chaincode-basic-org1
+spec:
+  selector:
+    matchLabels:
+      app: chaincode-basic-org1
+#  strategy:
+#    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: chaincode-basic-org1
+    spec:
+      imagePullSecrets:
+        - name: k8s-secret
+      containers:
+        - image: nikhilsg/nick_007:vkyc3
+          imagePullPolicy: Always
+          name: chaincode-basic-org1
+          env:
+            - name: CHAINCODE_ID
+              value: "asset:764fb1869d85638a1b878b9e93a621337ed934803d211129cbe6bd0d580d740d"
+            - name: CHAINCODE_SERVER_ADDRESS
+              value: "0.0.0.0:7052"
+          ports:
+            - containerPort: 7052
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - vkyc07        
+                    
+            

@@ -1,0 +1,14 @@
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+ name: cli-peer0-org1
+spec:
+ scaleTargetRef:
+   apiVersion: apps/v1
+   kind: Deployment
+   name: cli-peer0-org1
+ minReplicas: 1
+ maxReplicas: 10
+ targetCPUUtilizationPercentage: 80
+...
