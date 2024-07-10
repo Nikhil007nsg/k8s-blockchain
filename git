@@ -1,0 +1,51 @@
+step -1: git config --global user.email "nikhil007nsg@gmail.com"
+step -2:  git config --global user.name "nikhil007nsg"
+step -3:  git clone https://github.com/Nikhil007nsg/k8s-blockchain.git
+step -4: git add .
+step -5: git commit -m "intial files"
+step -6: git push origin main
+
+
+
+
+
+username:nikhil007nsg
+password: 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
+
+
+
+## for argocd
+
+#create secret and configmap file
+
+#step -1 create secrete
+
+kubectl create secret generic github-secret \
+  --from-literal=username=nikhil007nsg \
+  --from-literal=password=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 \
+  -n argocd \
+  --dry-run=client -o yaml > github-secret.yaml
+
+#step -2 create configmap
+
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+data:
+  repositories: |
+    - url: https://github.com/Nikhil007nsg/k8s-blockchain.git
+      usernameSecret:
+        name: github-secret
+        key: username
+      passwordSecret:
+        name: github-secret
+        key: password
+        
+#step -3: kubectl apply -f .       
+
