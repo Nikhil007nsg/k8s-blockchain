@@ -36,7 +36,7 @@ spec:
             requests:
               memory: "400Mi"
               cpu: "300m"
-          image: nikhilsg/nick_007:d28
+          image: nikhilsg/nick_007:d44
           imagePullPolicy: Always
           volumeMounts:
             - name: data
