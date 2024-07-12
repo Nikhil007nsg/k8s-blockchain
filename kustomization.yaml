@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../volume/pv.yaml
+  - ../volume/pvc.yaml
+  - ../volume/docker-secret.yaml
+  - ../volume/github-secret.yaml
+  - ../volume/argocd-cm.yaml
