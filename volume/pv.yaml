@@ -11,5 +11,5 @@ spec:
     - ReadWriteOnce
   nfs:
     path: /mnt/nfs_share/
-    server: 218.185.248.197
+    server: 172.27.22.159
    
