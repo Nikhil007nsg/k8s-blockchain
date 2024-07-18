@@ -50,5 +50,5 @@ spec:
                 - key: kubernetes.io/hostname
                   operator: In
                   values:
-                    - vkyc07   
+                    - ccslabf13
               
